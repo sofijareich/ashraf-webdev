@@ -62,3 +62,115 @@ a { color: inherit; }
   transition: top 0.2s ease;
 }
 .skip-link:focus { top: 16px; }
+
+/* ===== Cinematic scene system ===== */
+.scene-wrapper {
+  scroll-snap-type: y mandatory;
+}
+.scene {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  padding: 0 var(--gutter);
+}
+.scene-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+.scene-bg .media-fill {
+  position: absolute;
+  inset: -6%;
+  transform: scale(1.18);
+  transition: transform 3.2s cubic-bezier(.16,.8,.24,1);
+  opacity: 0;
+  transition-property: transform, opacity;
+}
+.scene.is-active .scene-bg .media-fill {
+  transform: scale(1);
+  opacity: 1;
+}
+.scene-scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+.scene-content {
+  position: relative;
+  z-index: 2;
+}
+.scene-content > * {
+  opacity: 0;
+  transform: translateY(36px);
+  transition: opacity 0.9s cubic-bezier(.16,.8,.24,1), transform 0.9s cubic-bezier(.16,.8,.24,1);
+  transition-delay: calc(var(--stagger, 0) * 90ms);
+}
+.scene.is-active .scene-content > * {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* aurora placeholder media — stand-in until real film/photo assets land */
+.aurora {
+  position: absolute;
+  inset: -20%;
+  background:
+    radial-gradient(38% 42% at 22% 28%, rgba(181,87,58,0.28), transparent 70%),
+    radial-gradient(46% 50% at 78% 66%, rgba(22,91,91,0.35), transparent 70%),
+    radial-gradient(60% 60% at 50% 100%, rgba(236,228,211,0.9), transparent 70%);
+  filter: blur(6px);
+  animation: auroraDrift 22s ease-in-out infinite alternate;
+}
+@keyframes auroraDrift {
+  from { transform: translate3d(-2%, -1%, 0) scale(1); }
+  to { transform: translate3d(2%, 2%, 0) scale(1.06); }
+}
+
+.placeholder-badge {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  z-index: 2;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  background: rgba(29,38,36,0.55);
+  color: var(--sand);
+  padding: 6px 12px;
+  border-radius: 999px;
+  backdrop-filter: blur(4px);
+}
+
+/* scene progress indicator */
+.scene-progress {
+  position: fixed;
+  right: 22px;
+  bottom: 22px;
+  z-index: 45;
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  font-size: 12px;
+  color: var(--ink);
+  opacity: 0.6;
+  font-variant-numeric: tabular-nums;
+}
+.scene-progress .sep { opacity: 0.5; }
+
+@media (prefers-reduced-motion: reduce) {
+  .scene-wrapper { scroll-snap-type: none; }
+  .scene { min-height: auto; padding-top: 80px; padding-bottom: 80px; }
+  .scene-content > * { opacity: 1 !important; transform: none !important; }
+  .scene-bg .media-fill { opacity: 1 !important; transform: none !important; }
+  .aurora { animation: none; }
+}
+@media (max-width: 720px) {
+  .scene-progress { display: none; }
+}

@@ -1,37 +1,33 @@
 ---
 ---
-<section class="hero">
-  <p class="eyebrow reveal-el" style="--d:0.1s">Zahnmedizin im Herzen von Nottuln</p>
-  <h1 class="kinetic">
-    <span class="reveal-el" style="--d:.15s">Zähne</span> <span class="reveal-el" style="--d:.25s">gut.</span><br />
-    <em><span class="reveal-el" style="--d:.4s">Alles</span> <span class="reveal-el" style="--d:.5s">gut.</span></em>
-  </h1>
-  <p class="sub reveal-el" style="--d:.6s">
-    Persönlich, verständlich und mit Zeit für Sie. Willkommen in Ihrer Zahnarztpraxis an der
-    Burgstraße — geführt von Dr. Ashraf Hanafi.
-  </p>
-  <div class="cta-row reveal-el" style="--d:.75s">
-    <a class="btn btn-primary" href="tel:+49250225061">Termin vereinbaren · 02502 25061</a>
-    <a class="btn btn-ghost" href="#leistungen">Praxis entdecken ↓</a>
+<section class="scene hero-scene" id="scene-hero">
+  <div class="scene-bg">
+    <div class="media-fill aurora"></div>
+  </div>
+  <div class="scene-scrim hero-scrim"></div>
+  <div class="placeholder-badge">Praxisfilm folgt</div>
+
+  <div class="scene-content hero-content">
+    <p class="eyebrow" style="--stagger:0">Zahnmedizin im Herzen von Nottuln</p>
+    <h1 class="kinetic" style="--stagger:1">
+      <span>Zähne</span> <span>gut.</span><br />
+      <em><span>Alles</span> <span>gut.</span></em>
+    </h1>
+    <p class="sub" style="--stagger:2">
+      Persönlich, verständlich und mit Zeit für Sie. Willkommen in Ihrer Zahnarztpraxis an der
+      Burgstraße — geführt von Dr. Ashraf Hanafi.
+    </p>
+    <div class="cta-row" style="--stagger:3">
+      <a class="btn btn-primary" href="tel:+49250225061">Termin vereinbaren · 02502 25061</a>
+      <a class="btn btn-ghost" href="#scene-philosophy">Praxis entdecken ↓</a>
+    </div>
   </div>
   <div class="scroll-cue" aria-hidden="true"><div class="line"></div>Scrollen</div>
 </section>
 
 <style>
-  .hero {
-    min-height: 100svh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 0 var(--gutter);
-    position: relative;
-  }
-  .eyebrow {
-    font-size: 13px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--teal);
-    margin-bottom: 22px;
+  .hero-scrim {
+    background: linear-gradient(180deg, rgba(244,239,228,0.15) 0%, rgba(244,239,228,0.85) 92%);
   }
   h1.kinetic {
     font-family: var(--font-serif);
@@ -42,26 +38,19 @@
     margin: 0 0 28px;
     max-width: 16ch;
   }
-  h1.kinetic em {
-    font-style: italic;
-    font-weight: 560;
-    color: var(--teal-deep);
+  h1.kinetic em { font-style: italic; font-weight: 560; color: var(--teal-deep); }
+  .eyebrow {
+    font-size: 13px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 22px;
   }
-  .sub {
-    font-size: clamp(16px, 2vw, 20px);
-    max-width: 44ch;
-    line-height: 1.55;
-  }
+  .sub { font-size: clamp(16px, 2vw, 20px); max-width: 44ch; line-height: 1.55; }
   .cta-row { display: flex; gap: 16px; margin-top: 36px; flex-wrap: wrap; }
   .btn {
-    font-size: 15px;
-    font-weight: 500;
-    padding: 15px 28px;
-    border-radius: 999px;
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
+    font-size: 15px; font-weight: 500; padding: 15px 28px; border-radius: 999px;
+    text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
     transition: transform 0.25s ease, background 0.25s ease;
   }
   .btn-primary { background: var(--teal-deep); color: var(--sand); }
@@ -69,29 +58,12 @@
   .btn-ghost { border: 1px solid var(--line); color: var(--ink); }
   .btn-ghost:hover { transform: translateY(-2px); border-color: var(--ink); }
   .scroll-cue {
-    position: absolute;
-    bottom: 40px; left: var(--gutter);
-    font-size: 12px;
-    opacity: 0.55;
-    display: flex;
-    align-items: center;
-    gap: 10px;
+    position: absolute; bottom: 40px; left: var(--gutter); z-index: 2;
+    font-size: 12px; opacity: 0.55; display: flex; align-items: center; gap: 10px;
   }
-  .scroll-cue .line {
-    width: 1px; height: 34px;
-    background: var(--ink);
-    opacity: 0.4;
-    animation: pulse 2s ease-in-out infinite;
-  }
-
-  .reveal-el {
-    opacity: 0;
-    transform: translateY(0.4em);
-    animation: fadeUp 0.9s cubic-bezier(.2,.8,.2,1) forwards;
-    animation-delay: var(--d, 0s);
-  }
-  h1.kinetic .reveal-el, .eyebrow.reveal-el { display: inline-block; }
-
-  @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+  .scroll-cue .line { width: 1px; height: 34px; background: var(--ink); opacity: 0.4; animation: pulse 2s ease-in-out infinite; }
   @keyframes pulse { 0%, 100% { opacity: 0.15; } 50% { opacity: 0.6; } }
+  @media (prefers-reduced-motion: reduce) {
+    .scroll-cue .line { animation: none; }
+  }
 </style>

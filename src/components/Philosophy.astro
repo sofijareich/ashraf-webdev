@@ -1,53 +1,31 @@
 ---
 ---
-<section class="philosophy">
-  <blockquote>
-    <span class="reveal" id="reveal-text">Zuhören ist der Anfang jeder guten Behandlung.</span>
-  </blockquote>
+<section class="scene philosophy-scene" id="scene-philosophy">
+  <div class="scene-scrim philosophy-scrim"></div>
+  <div class="scene-content philosophy-content">
+    <p class="tag" style="--stagger:0">Unsere Haltung</p>
+    <blockquote style="--stagger:1">Zuhören ist der Anfang<br /><em>jeder guten Behandlung.</em></blockquote>
+  </div>
 </section>
 
 <style>
-  .philosophy {
-    padding: min(18vw, 190px) var(--gutter);
-    max-width: 1100px;
-    margin: 0 auto;
+  .philosophy-scene { align-items: center; text-align: left; background: var(--teal-deep); }
+  .philosophy-scrim {
+    background: radial-gradient(60% 60% at 30% 30%, rgba(244,239,228,0.06), transparent 70%);
+  }
+  .philosophy-content { max-width: 1100px; }
+  .tag {
+    font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: rgba(244,239,228,0.6); margin: 0 0 26px;
   }
   blockquote {
     font-family: var(--font-serif);
     font-weight: 340;
     font-style: italic;
-    font-size: clamp(28px, 4.6vw, 54px);
-    line-height: 1.15;
+    font-size: clamp(32px, 6vw, 76px);
+    line-height: 1.1;
     margin: 0;
-    color: var(--teal-deep);
+    color: var(--sand);
   }
-  .reveal {
-    background: linear-gradient(
-      90deg,
-      var(--teal-deep) 0%,
-      var(--teal-deep) var(--p, 0%),
-      rgba(29, 38, 36, 0.22) var(--p, 0%)
-    );
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .reveal { --p: 100% !important; }
-  }
+  blockquote em { font-weight: 560; color: var(--terracotta); font-style: italic; }
 </style>
-
-<script>
-  const reveal = document.getElementById("reveal-text");
-  if (reveal && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-    const onScroll = () => {
-      const rect = reveal.getBoundingClientRect();
-      const vh = window.innerHeight;
-      let progress = 1 - rect.top / vh;
-      progress = Math.max(0, Math.min(1, progress * 1.4));
-      reveal.style.setProperty("--p", progress * 100 + "%");
-    };
-    window.addEventListener("scroll", onScroll, { passive: true });
-    onScroll();
-  }
-</script>

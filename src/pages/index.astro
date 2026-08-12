@@ -2,13 +2,13 @@
 import Layout from "../layouts/Layout.astro";
 import Header from "../components/Header.astro";
 import Hero from "../components/Hero.astro";
-import TrustBar from "../components/TrustBar.astro";
-import ServiceMarquee from "../components/ServiceMarquee.astro";
 import Philosophy from "../components/Philosophy.astro";
 import Services from "../components/Services.astro";
 import DoctorIntro from "../components/DoctorIntro.astro";
-import JournalPreview from "../components/JournalPreview.astro";
 import ContactCta from "../components/ContactCta.astro";
+import SceneProgress from "../components/SceneProgress.astro";
+import TrustBar from "../components/TrustBar.astro";
+import JournalPreview from "../components/JournalPreview.astro";
 import Footer from "../components/Footer.astro";
 ---
 <Layout
@@ -17,15 +17,17 @@ import Footer from "../components/Footer.astro";
   path="/"
 >
   <Header />
+  <SceneProgress />
   <main id="main">
-    <Hero />
+    <div class="scene-wrapper">
+      <Hero />
+      <Philosophy />
+      <Services />
+      <DoctorIntro />
+      <ContactCta />
+    </div>
     <TrustBar />
-    <ServiceMarquee />
-    <Philosophy />
-    <Services />
-    <DoctorIntro />
     <JournalPreview />
-    <ContactCta />
   </main>
   <Footer />
 </Layout>

@@ -1,0 +1,35 @@
+---
+---
+<div class="scene-progress" aria-hidden="true">
+  <span id="scene-current">01</span><span class="sep">/</span><span id="scene-total">09</span>
+</div>
+
+<script>
+  const scenes = Array.from(document.querySelectorAll<HTMLElement>(".scene"));
+  const currentEl = document.getElementById("scene-current");
+  const totalEl = document.getElementById("scene-total");
+  if (totalEl) totalEl.textContent = String(scenes.length).padStart(2, "0");
+
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (reduceMotion) {
+    scenes.forEach((s) => s.classList.add("is-active"));
+  } else if (scenes.length) {
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          entry.target.classList.toggle(
+            "is-active",
+            entry.isIntersecting && entry.intersectionRatio > 0.5
+          );
+          if (entry.isIntersecting && entry.intersectionRatio > 0.5 && currentEl) {
+            const idx = scenes.indexOf(entry.target as HTMLElement) + 1;
+            currentEl.textContent = String(idx).padStart(2, "0");
+          }
+        });
+      },
+      { threshold: [0, 0.5, 1] }
+    );
+    scenes.forEach((s) => io.observe(s));
+  }
+</script>

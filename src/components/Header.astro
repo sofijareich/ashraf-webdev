@@ -1,17 +1,8 @@
 ---
-const nav = [
-  { href: "/praxis", label: "Praxis" },
-  { href: "/leistungen", label: "Leistungen" },
-  { href: "/praxis#team", label: "Team" },
-  { href: "/journal", label: "Aktuelles" },
-];
 ---
 <header class="site-header">
   <a class="logo" href="/">HB+</a>
-  <nav aria-label="Hauptnavigation">
-    {nav.map((item) => <a href={item.href}>{item.label}</a>)}
-    <a class="call-pill" href="tel:+49250225061">02502 25061</a>
-  </nav>
+  <a class="call-pill" href="tel:+49250225061">02502 25061</a>
 </header>
 
 <style>
@@ -23,7 +14,9 @@ const nav = [
     align-items: center;
     justify-content: space-between;
     padding: 22px var(--gutter);
+    pointer-events: none;
   }
+  .site-header > * { pointer-events: auto; }
   .logo {
     font-family: var(--font-serif);
     font-weight: 600;
@@ -31,24 +24,14 @@ const nav = [
     color: var(--teal-deep);
     text-decoration: none;
   }
-  nav { display: flex; align-items: center; }
-  nav a {
-    text-decoration: none;
-    color: var(--ink);
-    font-size: 14px;
-    margin-left: 28px;
-    opacity: 0.75;
-  }
-  nav a:hover { opacity: 1; }
   .call-pill {
     border: 1px solid var(--teal-deep);
     border-radius: 999px;
     padding: 9px 18px;
     font-size: 13px;
-    color: var(--teal-deep) !important;
-    opacity: 1 !important;
-  }
-  @media (max-width: 720px) {
-    nav a:not(.call-pill) { display: none; }
+    color: var(--teal-deep);
+    text-decoration: none;
+    background: rgba(244,239,228,0.6);
+    backdrop-filter: blur(6px);
   }
 </style>
