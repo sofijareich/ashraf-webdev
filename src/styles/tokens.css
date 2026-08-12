@@ -174,3 +174,24 @@ a { color: inherit; }
 @media (max-width: 720px) {
   .scene-progress { display: none; }
 }
+
+/* ===== Scroll-progress driven motion utilities ===== */
+.parallax-slow { transform: translateY(calc((var(--sp, 0.5) - 0.5) * -60px)); }
+.parallax-fast { transform: translateY(calc((var(--sp, 0.5) - 0.5) * -140px)); }
+.parallax-x { transform: translateX(calc((var(--sp, 0.5) - 0.5) * -80px)); }
+
+.line-icon path,
+.line-icon circle {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.4;
+  vector-effect: non-scaling-stroke;
+  stroke-dasharray: 240;
+  stroke-dashoffset: calc(240 - (240 * var(--sp, 0)));
+  transition: stroke-dashoffset 0.1s linear;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .parallax-slow, .parallax-fast, .parallax-x { transform: none !important; }
+  .line-icon path, .line-icon circle { stroke-dashoffset: 0 !important; }
+}

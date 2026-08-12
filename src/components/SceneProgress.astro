@@ -31,5 +31,28 @@
       { threshold: [0, 0.5, 1] }
     );
     scenes.forEach((s) => io.observe(s));
+
+    let ticking = false;
+    const updateProgress = () => {
+      const vh = window.innerHeight;
+      scenes.forEach((s) => {
+        const rect = s.getBoundingClientRect();
+        let p = 1 - rect.top / vh;
+        p = Math.max(0, Math.min(1, p));
+        s.style.setProperty("--sp", p.toFixed(3));
+      });
+      ticking = false;
+    };
+    window.addEventListener(
+      "scroll",
+      () => {
+        if (!ticking) {
+          requestAnimationFrame(updateProgress);
+          ticking = true;
+        }
+      },
+      { passive: true }
+    );
+    updateProgress();
   }
 </script>
