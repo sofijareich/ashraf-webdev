@@ -1,0 +1,32 @@
+---
+const posts = [
+  { date: "14.07.2026", tag: "Praxisinfo", title: "Gut geplant durch die Ferienzeit", href: "/journal/ferienzeit-2026" },
+  { date: "03.06.2026", tag: "Team", title: "Wir suchen Verstärkung", href: "/karriere" },
+  { date: "12.05.2026", tag: "Zahntipp", title: "Vorsorge, die sich auszahlt", href: "/journal/vorsorge-zahlt-sich-aus" },
+];
+---
+<section class="journal">
+  <div class="journal-head">
+    <h2>Aus der Praxis</h2>
+    <a class="text-link" href="/journal">Alle Beiträge →</a>
+  </div>
+  <div class="journal-grid">
+    {posts.map((p) => (
+      <a class="post" href={p.href}>
+        <p class="post-meta">{p.date} · {p.tag}</p>
+        <h3>{p.title}</h3>
+      </a>
+    ))}
+  </div>
+</section>
+
+<style>
+  .journal { padding: 0 var(--gutter) 140px; max-width: var(--container); margin: 0 auto; }
+  .journal-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 40px; gap: 20px; flex-wrap: wrap; }
+  .journal-head h2 { font-family: var(--font-serif); font-weight: 500; font-size: 28px; margin: 0; }
+  .text-link { text-decoration: none; border-bottom: 1px solid currentColor; padding-bottom: 2px; font-size: 14px; white-space: nowrap; }
+  .journal-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 32px; }
+  .post { text-decoration: none; color: var(--ink); border-top: 1px solid var(--line); padding-top: 20px; display: block; }
+  .post-meta { font-size: 12px; opacity: 0.6; margin: 0 0 10px; }
+  .post h3 { font-family: var(--font-serif); font-weight: 500; font-size: 19px; margin: 0; line-height: 1.3; }
+</style>

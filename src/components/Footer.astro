@@ -1,0 +1,74 @@
+---
+const hours = [
+  ["Montag", "8–12 & 13–18"],
+  ["Dienstag", "8–12 & 13–18"],
+  ["Mittwoch", "8–14"],
+  ["Donnerstag", "8–12 & 13–18"],
+  ["Freitag", "8–14"],
+];
+---
+<footer class="site-footer" id="kontakt">
+  <div class="footer-grid">
+    <div>
+      <p class="footer-logo">HB+ Zahnärzte Nottuln</p>
+      <p class="muted">Burgstraße 4 · 48301 Nottuln</p>
+      <p>
+        <a href="tel:+49250225061">02502 25061</a> ·
+        <a href="mailto:info@zahnarzt-nottuln.de">info@zahnarzt-nottuln.de</a>
+      </p>
+      <a class="ext-link" href="https://maps.app.goo.gl/5kTVvU4RDUEq6rX49" target="_blank" rel="noopener">
+        In Google Maps öffnen ↗
+      </a>
+    </div>
+    <div>
+      <p class="footer-heading">Öffnungszeiten</p>
+      <ul class="hours">
+        {hours.map(([day, time]) => (
+          <li><span>{day}</span><span>{time}</span></li>
+        ))}
+      </ul>
+    </div>
+    <div>
+      <p class="footer-heading">Mehr</p>
+      <a class="ext-link" href="https://www.instagram.com/zahnaerzte.nottuln/" target="_blank" rel="noopener">Instagram ↗</a>
+      <a class="ext-link" href="/karriere">Karriere</a>
+      <a class="ext-link" href="/impressum">Impressum</a>
+      <a class="ext-link" href="/datenschutz">Datenschutz</a>
+    </div>
+  </div>
+  <p class="muted small">
+    Keine Cookies, kein Tracking, keine Speicherung von Besucherdaten. © {new Date().getFullYear()} HB+ Zahnärzte Nottuln
+  </p>
+</footer>
+
+<style>
+  .site-footer {
+    padding: 80px var(--gutter) 40px;
+    border-top: 1px solid var(--line);
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 40px;
+    margin-bottom: 40px;
+  }
+  .footer-logo {
+    font-family: var(--font-serif);
+    font-size: 20px;
+    color: var(--teal-deep);
+    margin: 0 0 10px;
+  }
+  .footer-heading {
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin: 0 0 16px;
+  }
+  .muted { opacity: 0.7; }
+  .small { font-size: 12px; }
+  .hours { list-style: none; padding: 0; margin: 0; font-size: 14px; }
+  .hours li { display: flex; justify-content: space-between; gap: 12px; padding: 4px 0; max-width: 220px; }
+  .ext-link { display: block; text-decoration: none; margin-bottom: 10px; font-size: 14px; }
+  .ext-link:hover { text-decoration: underline; }
+</style>

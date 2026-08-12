@@ -1,0 +1,31 @@
+---
+const items = ["Prophylaxe", "Zahnerhalt", "Zahnersatz", "Ästhetik", "Kinderzahnmedizin"];
+---
+<div class="marquee-strip" aria-hidden="true">
+  <div class="marquee-track">
+    {[...items, ...items].map((item) => <span>{item}</span>)}
+  </div>
+</div>
+
+<style>
+  .marquee-strip {
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    padding: 20px 0;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .marquee-track {
+    display: inline-flex;
+    gap: 48px;
+    animation: scroll 26s linear infinite;
+    font-family: var(--font-serif);
+    font-size: 18px;
+    color: var(--teal-deep);
+  }
+  .marquee-track span { opacity: 0.55; }
+  @keyframes scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+</style>

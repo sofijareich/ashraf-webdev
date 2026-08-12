@@ -1,0 +1,28 @@
+---
+const facts = [
+  { label: "Sprechzeiten", value: "Montag – Freitag" },
+  { label: "Zentral in Nottuln", value: "Burgstraße 4" },
+  { label: "Unter neuer Leitung seit", value: "2025" },
+];
+---
+<section class="trust-bar">
+  {facts.map((f) => (
+    <div class="fact">
+      <p class="fact-label">{f.label}</p>
+      <p class="fact-value">{f.value}</p>
+    </div>
+  ))}
+</section>
+
+<style>
+  .trust-bar {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 24px;
+    padding: 0 var(--gutter) 100px;
+    max-width: var(--container);
+    margin: 0 auto;
+  }
+  .fact-label { font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.6; margin: 0 0 6px; }
+  .fact-value { font-family: var(--font-serif); font-size: 22px; margin: 0; color: var(--teal-deep); }
+</style>

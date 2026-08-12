@@ -1,0 +1,31 @@
+---
+---
+<section class="contact-cta">
+  <p class="eyebrow">Wir sind für Sie da</p>
+  <h2>Ihr Termin beginnt<br /><em>mit einem Anruf.</em></h2>
+  <a class="btn btn-primary" href="tel:+49250225061">02502 25061 →</a>
+</section>
+
+<style>
+  .contact-cta {
+    padding: 100px var(--gutter);
+    max-width: var(--container);
+    margin: 0 auto;
+    text-align: left;
+  }
+  .eyebrow { font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--teal); margin: 0 0 20px; }
+  h2 { font-family: var(--font-serif); font-weight: 340; font-size: clamp(32px, 5vw, 60px); line-height: 1.05; margin: 0 0 36px; }
+  h2 em { font-style: italic; font-weight: 560; color: var(--teal-deep); }
+  .btn-primary {
+    background: var(--teal-deep);
+    color: var(--sand);
+    text-decoration: none;
+    padding: 16px 30px;
+    border-radius: 999px;
+    font-size: 15px;
+    font-weight: 500;
+    display: inline-flex;
+    transition: transform 0.25s ease, background 0.25s ease;
+  }
+  .btn-primary:hover { transform: translateY(-2px); background: var(--teal); }
+</style>

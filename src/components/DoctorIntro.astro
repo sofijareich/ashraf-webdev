@@ -1,0 +1,52 @@
+---
+---
+<section class="doctor" id="team">
+  <div class="doctor-grid">
+    <div class="portrait-frame" role="img" aria-label="Porträt Dr. Ashraf Hanafi (Praxisfoto folgt)">
+      <span>Praxisfoto folgt</span>
+    </div>
+    <div class="doctor-text">
+      <p class="eyebrow">Ihr Zahnarzt</p>
+      <h2>Dr. med. dent. Ashraf Hanafi</h2>
+      <blockquote>„Mir ist wichtig, dass Sie sich gut informiert und jederzeit sicher fühlen.“</blockquote>
+      <p>
+        In der Region aufgewachsen, in Münster ausgebildet und seit vielen Jahren mit Leidenschaft
+        Zahnarzt. Gemeinsam mit dem Praxisteam nimmt er sich Zeit für Ihre Zahngesundheit.
+      </p>
+      <a class="text-link" href="/praxis">Praxis &amp; Team kennenlernen →</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .doctor { padding: 0 var(--gutter) 140px; max-width: var(--container); margin: 0 auto; }
+  .doctor-grid {
+    display: grid;
+    grid-template-columns: minmax(220px, 380px) 1fr;
+    gap: 60px;
+    align-items: center;
+  }
+  .portrait-frame {
+    aspect-ratio: 3 / 4;
+    background: var(--sand-deep);
+    border: 1px dashed var(--line);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    color: var(--ink);
+    opacity: 0.6;
+    text-align: center;
+    padding: 20px;
+  }
+  .eyebrow { font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--teal); margin: 0 0 14px; }
+  h2 { font-family: var(--font-serif); font-weight: 500; font-size: clamp(28px, 3.4vw, 40px); margin: 0 0 20px; }
+  blockquote { font-family: var(--font-serif); font-style: italic; font-size: 20px; color: var(--teal-deep); margin: 0 0 20px; }
+  .doctor-text p:not(.eyebrow) { line-height: 1.6; margin: 0 0 24px; }
+  .text-link { text-decoration: none; border-bottom: 1px solid currentColor; padding-bottom: 2px; }
+  @media (max-width: 780px) {
+    .doctor-grid { grid-template-columns: 1fr; }
+    .portrait-frame { max-width: 280px; }
+  }
+</style>

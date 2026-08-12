@@ -1,0 +1,53 @@
+---
+---
+<section class="philosophy">
+  <blockquote>
+    <span class="reveal" id="reveal-text">Zuhören ist der Anfang jeder guten Behandlung.</span>
+  </blockquote>
+</section>
+
+<style>
+  .philosophy {
+    padding: min(18vw, 190px) var(--gutter);
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  blockquote {
+    font-family: var(--font-serif);
+    font-weight: 340;
+    font-style: italic;
+    font-size: clamp(28px, 4.6vw, 54px);
+    line-height: 1.15;
+    margin: 0;
+    color: var(--teal-deep);
+  }
+  .reveal {
+    background: linear-gradient(
+      90deg,
+      var(--teal-deep) 0%,
+      var(--teal-deep) var(--p, 0%),
+      rgba(29, 38, 36, 0.22) var(--p, 0%)
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { --p: 100% !important; }
+  }
+</style>
+
+<script>
+  const reveal = document.getElementById("reveal-text");
+  if (reveal && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    const onScroll = () => {
+      const rect = reveal.getBoundingClientRect();
+      const vh = window.innerHeight;
+      let progress = 1 - rect.top / vh;
+      progress = Math.max(0, Math.min(1, progress * 1.4));
+      reveal.style.setProperty("--p", progress * 100 + "%");
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+  }
+</script>
