@@ -1,7 +1,12 @@
 ---
 ---
 <section class="scene philosophy-scene" id="scene-philosophy">
+  <div class="scene-bg">
+    <div class="media-photo philosophy-photo parallax-slow" style="background-image:url(/images/trust-portrait.jpg)"></div>
+    <div class="mesh-bg mesh-bg--dark"></div>
+  </div>
   <div class="scene-scrim philosophy-scrim"></div>
+  <div class="grain"></div>
   <div class="scene-content philosophy-content">
     <p class="tag" style="--stagger:0">Unsere Haltung</p>
     <blockquote style="--stagger:1">Zuhören ist der Anfang<br /><em>jeder guten Behandlung.</em></blockquote>
@@ -9,23 +14,24 @@
 </section>
 
 <style>
-  .philosophy-scene { align-items: center; text-align: left; background: var(--teal-deep); }
+  .philosophy-scene { align-items: center; text-align: left; }
+  .philosophy-photo { opacity: 0.22; filter: grayscale(0.5) contrast(1.05); mix-blend-mode: luminosity; }
   .philosophy-scrim {
-    background: radial-gradient(60% 60% at 30% 30%, rgba(244,239,228,0.06), transparent 70%);
+    background: radial-gradient(60% 60% at 30% 30%, rgba(245,243,239,0.06), transparent 70%);
   }
   .philosophy-content { max-width: 1100px; }
   .tag {
-    font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase;
-    color: rgba(244,239,228,0.6); margin: 0 0 26px;
+    font-size: 13.5px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 600;
+    color: rgba(245,243,239,0.62); margin: 0 0 26px;
   }
   blockquote {
     font-family: var(--font-serif);
-    font-weight: 340;
+    font-weight: 600;
     font-style: italic;
     font-size: clamp(32px, 6vw, 76px);
     line-height: 1.1;
     margin: 0;
-    color: var(--sand);
+    color: var(--paper);
   }
-  blockquote em { font-weight: 560; color: var(--terracotta); font-style: italic; }
+  blockquote em { font-weight: 800; color: var(--amber-bright); font-style: italic; }
 </style>

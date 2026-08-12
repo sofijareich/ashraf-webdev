@@ -1,7 +1,8 @@
 ---
 ---
 <section class="scene contact-scene" id="scene-contact">
-  <div class="scene-bg"><div class="media-fill aurora contact-aurora parallax-fast"></div></div>
+  <div class="scene-bg"><div class="mesh-bg mesh-bg--light parallax-fast"></div></div>
+  <div class="grain"></div>
   <div class="scene-content contact-content">
     <p class="eyebrow" style="--stagger:0">Wir sind für Sie da</p>
     <h2 style="--stagger:1">Ihr Termin beginnt<br /><em>mit einem Anruf.</em></h2>
@@ -11,18 +12,17 @@
 
 <style>
   .contact-scene { align-items: center; }
-  .contact-aurora { filter: blur(10px) brightness(1.08); }
   .contact-content { max-width: 720px; }
-  .eyebrow { font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--teal); margin: 0 0 20px; }
+  .eyebrow { font-size: 13.5px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 600; color: var(--signal); margin: 0 0 20px; }
   .contact-content h2 {
-    font-family: var(--font-serif); font-weight: 340; font-size: clamp(36px, 6vw, 72px);
-    line-height: 1.04; margin: 0 0 40px; color: var(--teal-deep);
+    font-weight: 660; font-size: clamp(36px, 6vw, 72px);
+    line-height: 1.04; margin: 0 0 40px; color: var(--ink);
   }
-  .contact-content h2 em { font-style: italic; font-weight: 560; }
+  .contact-content h2 em { font-style: italic; font-weight: 800; color: var(--signal-deep); }
   .btn-primary {
-    background: var(--teal-deep); color: var(--sand); text-decoration: none;
-    padding: 17px 32px; border-radius: 999px; font-size: 16px; font-weight: 500;
-    display: inline-flex; transition: transform 0.25s ease, background 0.25s ease;
+    background: var(--ink); color: var(--paper); text-decoration: none;
+    padding: 18px 34px; border-radius: 999px; font-size: 16px; font-weight: 600;
+    display: inline-flex; transition: transform 0.3s var(--ease-out), background 0.3s ease, box-shadow 0.3s ease;
   }
-  .btn-primary:hover { transform: translateY(-2px); background: var(--teal); }
+  .btn-primary:hover { transform: translateY(-3px) scale(1.02); background: var(--signal-deep); box-shadow: 0 14px 30px rgba(10,89,67,0.25); }
 </style>

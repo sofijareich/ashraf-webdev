@@ -1,34 +1,88 @@
 ---
 ---
 <section class="scene doctor-scene" id="scene-doctor">
-  <div class="scene-bg"><div class="media-fill doctor-tint parallax-slow"></div></div>
+  <div class="scene-bg"><div class="mesh-bg mesh-bg--dark parallax-slow"></div></div>
   <div class="scene-scrim doctor-scrim"></div>
-  <div class="placeholder-badge">Porträtfoto folgt</div>
-  <div class="scene-content doctor-content">
-    <p class="eyebrow" style="--stagger:0">Ihr Zahnarzt</p>
-    <h2 style="--stagger:1">Dr. med. dent.<br /><em>Ashraf Hanafi</em></h2>
-    <blockquote style="--stagger:2">„Mir ist wichtig, dass Sie sich gut informiert und jederzeit sicher fühlen.“</blockquote>
-    <a class="text-link" style="--stagger:3" href="/praxis">Praxis &amp; Team kennenlernen →</a>
+  <div class="grain"></div>
+
+  <div class="doctor-grid">
+    <div class="scene-content doctor-content">
+      <p class="eyebrow" style="--stagger:0">Ihr Zahnarzt</p>
+      <h2 style="--stagger:1">Dr. med. dent.<br /><em>Ashraf Hanafi</em></h2>
+      <blockquote style="--stagger:2">„Mir ist wichtig, dass Sie sich gut informiert und jederzeit sicher fühlen.“</blockquote>
+      <a class="text-link" style="--stagger:3" href="/praxis">Praxis &amp; Team kennenlernen →</a>
+    </div>
+
+    <div class="portrait-frame" style="--stagger:1">
+      <div class="portrait-ring" aria-hidden="true"></div>
+      <svg class="portrait-bust" viewBox="0 0 200 220" aria-hidden="true">
+        <path d="M100,30 C124,30 140,50 140,76 C140,100 126,116 100,116 C74,116 60,100 60,76 C60,50 76,30 100,30 Z" />
+        <path d="M36,206 C36,158 62,132 100,132 C138,132 164,158 164,206" />
+      </svg>
+      <span class="portrait-initials">A·H</span>
+      <span class="placeholder-badge portrait-badge">Porträtfoto folgt</span>
+    </div>
   </div>
 </section>
 
 <style>
-  .doctor-scene { align-items: flex-end; background: var(--ink); }
-  .doctor-tint {
-    background: linear-gradient(140deg, rgba(22,91,91,0.9), rgba(29,38,36,0.98));
-    opacity: 1 !important; transform: none !important;
+  .doctor-scene { align-items: center; }
+  .doctor-scrim { background: linear-gradient(100deg, rgba(9,11,12,0.55) 0%, transparent 55%); }
+  .doctor-grid {
+    position: relative; z-index: 2;
+    display: grid;
+    grid-template-columns: minmax(0,1.2fr) minmax(240px, 360px);
+    align-items: center;
+    gap: 5vw;
+    width: 100%;
   }
-  .doctor-scrim { background: linear-gradient(0deg, rgba(0,0,0,0.35), transparent 55%); }
-  .doctor-content { max-width: 640px; padding-bottom: 90px; color: var(--sand); }
-  .eyebrow { font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--terracotta); margin: 0 0 18px; }
+  .doctor-content { color: var(--paper); }
+  .eyebrow { font-size: 13.5px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 600; color: var(--amber-bright); margin: 0 0 18px; }
   .doctor-content h2 {
-    font-family: var(--font-serif); font-weight: 340; font-size: clamp(32px, 5vw, 58px);
-    line-height: 1.08; margin: 0 0 26px; color: var(--sand);
+    font-weight: 660; font-size: clamp(32px, 5vw, 58px);
+    line-height: 1.06; margin: 0 0 26px; color: var(--paper);
   }
-  .doctor-content h2 em { font-style: italic; font-weight: 560; }
+  .doctor-content h2 em { font-style: italic; font-weight: 800; }
   .doctor-content blockquote {
-    font-family: var(--font-serif); font-style: italic; font-size: clamp(18px, 2vw, 22px);
-    margin: 0 0 26px; color: rgba(244,239,228,0.85);
+    font-family: var(--font-serif); font-style: italic; font-weight: 500; font-size: clamp(18px, 2vw, 22px);
+    margin: 0 0 26px; color: rgba(245,243,239,0.85); max-width: 46ch;
   }
-  .doctor-content .text-link { color: var(--sand); text-decoration: none; border-bottom: 1px solid currentColor; padding-bottom: 2px; }
+  .doctor-content .text-link { color: var(--paper); text-decoration: none; border-bottom: 1px solid currentColor; padding-bottom: 2px; }
+
+  .portrait-frame {
+    position: relative;
+    aspect-ratio: 4 / 5;
+    border-radius: 22px;
+    overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+    background: linear-gradient(150deg, rgba(23,185,140,0.16), rgba(196,82,42,0.14));
+    border: 1px solid var(--graphite-line);
+  }
+  .portrait-ring {
+    position: absolute; inset: -30%;
+    background: conic-gradient(from 0deg, rgba(23,185,140,0.32), rgba(196,82,42,0.28), rgba(23,185,140,0.32));
+    filter: blur(30px);
+    animation: ringSpin 16s linear infinite;
+  }
+  @keyframes ringSpin { to { transform: rotate(360deg); } }
+  .portrait-bust {
+    position: relative; z-index: 1;
+    width: 46%; height: auto;
+    color: rgba(245,243,239,0.5);
+  }
+  .portrait-bust path { fill: none; stroke: currentColor; stroke-width: 2.2; }
+  .portrait-initials {
+    position: absolute; top: 18px; left: 18px; z-index: 2;
+    font-family: var(--font-serif); font-weight: 700; font-size: 14px;
+    letter-spacing: 0.05em; color: rgba(245,243,239,0.7);
+  }
+  .portrait-badge { z-index: 2; }
+
+  @media (max-width: 860px) {
+    .doctor-grid { grid-template-columns: 1fr; }
+    .portrait-frame { max-width: 300px; margin: 0 auto; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .portrait-ring { animation: none; }
+  }
 </style>

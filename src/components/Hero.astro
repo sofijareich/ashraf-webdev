@@ -2,71 +2,271 @@
 ---
 <section class="scene hero-scene" id="scene-hero">
   <div class="scene-bg">
-    <div class="media-fill aurora"></div>
+    <div class="media-photo hero-photo" style="background-image:url(/images/hero-atmosphere.jpg)"></div>
+    <div class="mesh-bg mesh-bg--light hero-mesh"></div>
   </div>
   <div class="scene-scrim hero-scrim"></div>
+  <div class="grain"></div>
   <div class="placeholder-badge">Praxisfilm folgt</div>
 
-  <div class="scene-content hero-content">
-    <p class="eyebrow" style="--stagger:0">Zahnmedizin im Herzen von Nottuln</p>
-    <h1 class="kinetic" style="--stagger:1">
-      <span>Zähne</span> <span>gut.</span><br />
-      <em><span>Alles</span> <span>gut.</span></em>
-    </h1>
-    <p class="sub" style="--stagger:2">
-      Persönlich, verständlich und mit Zeit für Sie. Willkommen in Ihrer Zahnarztpraxis an der
-      Burgstraße — geführt von Dr. Ashraf Hanafi.
-    </p>
-    <div class="cta-row" style="--stagger:3">
-      <a class="btn btn-primary" href="tel:+49250225061">Termin vereinbaren · 02502 25061</a>
-      <a class="btn btn-ghost" href="#scene-philosophy">Praxis entdecken ↓</a>
+  <div class="hero-grid">
+    <div class="scene-content hero-content">
+      <p class="eyebrow" style="--stagger:0">Zahnmedizin im Herzen von Nottuln</p>
+      <h1 class="kinetic" style="--stagger:1">
+        <span>Zähne</span> <span>gut.</span><br />
+        <em><span>Alles</span> <span>gut.</span></em>
+      </h1>
+      <p class="sub" style="--stagger:2">
+        Persönlich, verständlich und mit Zeit für Sie. Willkommen in Ihrer Zahnarztpraxis an der
+        Burgstraße — geführt von Dr. Ashraf Hanafi.
+      </p>
+      <div class="cta-row" style="--stagger:3">
+        <a class="btn btn-primary" href="tel:+49250225061">Termin vereinbaren · 02502 25061</a>
+        <a class="btn btn-ghost" href="#scene-philosophy">Praxis entdecken ↓</a>
+      </div>
+    </div>
+
+    <div class="hero-stage" style="--stagger:2">
+      <canvas id="tooth-canvas" aria-hidden="true"></canvas>
+      <div class="stage-fallback" id="stage-fallback" aria-hidden="true">
+        <svg viewBox="0 0 120 140" width="90" height="105">
+          <path d="M60,4 C90,4 96,32 90,58 C86,78 78,92 70,110 C66,120 60,136 54,110 C50,92 42,78 30,58 C22,30 30,4 60,4 Z"
+            fill="none" stroke="currentColor" stroke-width="2.4"/>
+        </svg>
+      </div>
+      <div class="stage-caption">
+        <span class="stage-dot" aria-hidden="true"></span>
+        <span id="stage-label">Vorher</span>
+      </div>
     </div>
   </div>
-  <div class="scroll-cue" aria-hidden="true"><div class="line"></div>Scrollen</div>
+
+  <div class="scroll-cue" aria-hidden="true"><div class="line"></div>Scrollen für die Verwandlung</div>
 </section>
 
 <style>
-  .hero-scrim {
-    background: linear-gradient(180deg, rgba(244,239,228,0.15) 0%, rgba(244,239,228,0.85) 92%);
+  .hero-photo {
+    filter: saturate(0.72) brightness(0.86) sepia(0.06);
   }
+  .hero-mesh { opacity: 0.55; mix-blend-mode: soft-light; }
+  .hero-scrim {
+    background:
+      linear-gradient(100deg, rgba(245,243,239,0.96) 0%, rgba(245,243,239,0.75) 38%, rgba(245,243,239,0.28) 62%, rgba(20,24,26,0.5) 100%);
+  }
+
+  .hero-grid {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(280px, 420px);
+    align-items: center;
+    gap: 4vw;
+    width: 100%;
+  }
+
   h1.kinetic {
     font-family: var(--font-serif);
-    font-weight: 340;
-    font-size: clamp(48px, 9.5vw, 132px);
-    line-height: 0.98;
-    letter-spacing: -0.01em;
+    font-weight: 660;
+    font-size: clamp(46px, 8.6vw, 118px);
+    line-height: 0.97;
+    letter-spacing: -0.02em;
     margin: 0 0 28px;
     max-width: 16ch;
   }
-  h1.kinetic em { font-style: italic; font-weight: 560; color: var(--teal-deep); }
+  h1.kinetic span {
+    display: inline-block;
+    animation: wordIn 0.9s var(--ease-out) backwards;
+  }
+  h1.kinetic span:nth-child(1) { animation-delay: 0.05s; }
+  h1.kinetic span:nth-child(2) { animation-delay: 0.15s; }
+  @keyframes wordIn {
+    from { opacity: 0; transform: translateY(0.5em) rotateX(35deg); }
+    to { opacity: 1; transform: translateY(0) rotateX(0); }
+  }
+  h1.kinetic em { font-style: italic; font-weight: 780; color: var(--signal-deep); }
   .eyebrow {
-    font-size: 13px;
+    font-size: 13.5px;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: var(--teal);
+    font-weight: 600;
+    color: var(--signal);
     margin-bottom: 22px;
   }
-  .sub { font-size: clamp(16px, 2vw, 20px); max-width: 44ch; line-height: 1.55; }
+  .sub { font-size: clamp(16.5px, 2vw, 20px); max-width: 44ch; line-height: 1.55; color: var(--ink-soft); }
   .cta-row { display: flex; gap: 16px; margin-top: 36px; flex-wrap: wrap; }
   .btn {
-    font-size: 15px; font-weight: 500; padding: 15px 28px; border-radius: 999px;
+    font-size: 15px; font-weight: 600; padding: 16px 30px; border-radius: 999px;
     text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
-    transition: transform 0.25s ease, background 0.25s ease;
+    transition: transform 0.3s var(--ease-out), background 0.3s ease, box-shadow 0.3s ease;
   }
-  .btn-primary { background: var(--teal-deep); color: var(--sand); }
-  .btn-primary:hover { transform: translateY(-2px); background: var(--teal); }
+  .btn-primary { background: var(--ink); color: var(--paper); }
+  .btn-primary:hover { transform: translateY(-3px) scale(1.02); background: var(--signal-deep); box-shadow: 0 14px 30px rgba(10,89,67,0.28); }
   .btn-ghost { border: 1px solid var(--line); color: var(--ink); }
-  .btn-ghost:hover { transform: translateY(-2px); border-color: var(--ink); }
+  .btn-ghost:hover { transform: translateY(-3px); border-color: var(--ink); }
+
+  .hero-stage {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .hero-stage::before {
+    content: "";
+    position: absolute;
+    inset: 6%;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(23,185,140,0.16), transparent 70%);
+    filter: blur(18px);
+    transition: background 0.6s ease;
+  }
+  #tooth-canvas { width: 100%; height: 100%; display: block; touch-action: none; }
+  .stage-fallback { position: absolute; color: var(--signal-deep); display: none; }
+  .stage-fallback.is-visible { display: block; }
+  .stage-caption {
+    position: absolute;
+    bottom: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex; align-items: center; gap: 8px;
+    font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600;
+    color: var(--ink-soft);
+    background: rgba(245,243,239,0.85);
+    backdrop-filter: blur(6px);
+    padding: 7px 14px;
+    border-radius: 999px;
+  }
+  .stage-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--amber); transition: background 0.4s ease; }
+  .stage-dot.is-healthy { background: var(--signal-bright); }
+
   .scroll-cue {
     position: absolute; bottom: 40px; left: var(--gutter); z-index: 2;
     font-size: 12px; opacity: 0.55; display: flex; align-items: center; gap: 10px;
   }
   .scroll-cue .line { width: 1px; height: 34px; background: var(--ink); opacity: 0.4; animation: pulse 2s ease-in-out infinite; }
   @keyframes pulse { 0%, 100% { opacity: 0.15; } 50% { opacity: 0.6; } }
+
+  @media (max-width: 900px) {
+    .hero-grid { grid-template-columns: 1fr; }
+    .hero-stage { max-width: 280px; margin: 0 auto; order: -1; }
+  }
   @media (prefers-reduced-motion: reduce) {
     .scroll-cue .line { animation: none; }
+    h1.kinetic span { animation: none; opacity: 1; transform: none; }
   }
   @media (max-height: 700px) {
     .scroll-cue { display: none; }
   }
 </style>
+
+<script>
+  const stage = document.querySelector<HTMLElement>(".hero-stage");
+  const canvas = document.getElementById("tooth-canvas") as HTMLCanvasElement | null;
+  const fallback = document.getElementById("stage-fallback");
+  const stageLabel = document.getElementById("stage-label");
+  const stageDot = document.querySelector(".stage-dot");
+  const heroScene = document.getElementById("scene-hero");
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  function showFallback() {
+    fallback?.classList.add("is-visible");
+    if (canvas) canvas.style.display = "none";
+  }
+
+  function setStage(healthy: boolean) {
+    if (stageLabel) stageLabel.textContent = healthy ? "Nachher" : "Vorher";
+    stageDot?.classList.toggle("is-healthy", healthy);
+    if (stage) {
+      (stage as HTMLElement).style.setProperty(
+        "--glow",
+        healthy ? "rgba(23,185,140,0.22)" : "rgba(196,82,42,0.18)"
+      );
+    }
+  }
+
+  if (reduceMotion || !canvas || !heroScene) {
+    showFallback();
+  } else {
+    initTooth().catch(showFallback);
+  }
+
+  async function initTooth() {
+    const THREE = await import("three");
+
+    const renderer = new THREE.WebGLRenderer({ canvas: canvas!, alpha: true, antialias: true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(32, 1, 0.1, 100);
+    camera.position.set(0, 0.1, 5.2);
+
+    const key = new THREE.DirectionalLight(0xffffff, 2.1);
+    key.position.set(2.5, 3, 4);
+    scene.add(key);
+    const fill = new THREE.DirectionalLight(0x8fd6c1, 0.9);
+    fill.position.set(-3, -1, 2);
+    scene.add(fill);
+    const rim = new THREE.DirectionalLight(0xe67a44, 0.6);
+    rim.position.set(-1, 2, -3);
+    scene.add(rim);
+    scene.add(new THREE.AmbientLight(0xffffff, 0.55));
+
+    const profile = [
+      [0.0, -1.3], [0.12, -1.12], [0.17, -0.72], [0.14, -0.36],
+      [0.24, -0.14], [0.44, 0.06], [0.5, 0.34], [0.46, 0.58],
+      [0.3, 0.84], [0.0, 0.95],
+    ].map(([x, y]) => new THREE.Vector2(x, y));
+    const geometry = new THREE.LatheGeometry(profile, 56);
+    geometry.computeVertexNormals();
+
+    const beforeMat = new THREE.MeshPhysicalMaterial({
+      color: 0xb9ac8c, roughness: 0.75, metalness: 0.05, clearcoat: 0.1,
+      emissive: 0x3a1508, emissiveIntensity: 0.12,
+    });
+    const afterMat = new THREE.MeshPhysicalMaterial({
+      color: 0xf7f5ef, roughness: 0.22, metalness: 0.02, clearcoat: 0.7, clearcoatRoughness: 0.15,
+      emissive: 0x0a5943, emissiveIntensity: 0.05,
+    });
+
+    const mesh = new THREE.Mesh(geometry, beforeMat);
+    mesh.scale.setScalar(1.7);
+    scene.add(mesh);
+
+    let healthy = false;
+    setStage(false);
+
+    function resize() {
+      const el = canvas!.parentElement!;
+      const size = el.clientWidth;
+      renderer.setSize(size, size, false);
+      camera.aspect = 1;
+      camera.updateProjectionMatrix();
+    }
+    resize();
+    window.addEventListener("resize", resize);
+
+    let idle = 0;
+    function frame() {
+      requestAnimationFrame(frame);
+      idle += 0.0035;
+
+      const rect = heroScene!.getBoundingClientRect();
+      const vh = window.innerHeight;
+      let p = -rect.top / vh;
+      p = Math.max(0, Math.min(1, p));
+
+      mesh.rotation.x = p * Math.PI + Math.sin(idle) * 0.04;
+      mesh.rotation.y = idle * 0.6;
+
+      const shouldBeHealthy = p > 0.52;
+      if (shouldBeHealthy !== healthy) {
+        healthy = shouldBeHealthy;
+        mesh.material = healthy ? afterMat : beforeMat;
+        setStage(healthy);
+      }
+
+      renderer.render(scene, camera);
+    }
+    frame();
+  }
+</script>

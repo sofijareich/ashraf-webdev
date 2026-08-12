@@ -1,8 +1,11 @@
 ---
 ---
 <header class="site-header">
-  <a class="logo" href="/">HB+</a>
-  <a class="call-pill" href="tel:+49250225061">02502 25061</a>
+  <a class="logo" href="/">HB<span>+</span></a>
+  <a class="call-pill" href="tel:+49250225061">
+    <span class="call-dot" aria-hidden="true"></span>
+    02502 25061
+  </a>
 </header>
 
 <style>
@@ -19,19 +22,36 @@
   .site-header > * { pointer-events: auto; }
   .logo {
     font-family: var(--font-serif);
-    font-weight: 600;
-    font-size: 20px;
-    color: var(--teal-deep);
+    font-weight: 750;
+    font-size: 21px;
+    color: var(--ink);
     text-decoration: none;
+    letter-spacing: -0.01em;
   }
+  .logo span { color: var(--signal); }
   .call-pill {
-    border: 1px solid var(--teal-deep);
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    border: 1px solid var(--line);
     border-radius: 999px;
-    padding: 9px 18px;
-    font-size: 13px;
-    color: var(--teal-deep);
+    padding: 9px 18px 9px 14px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ink);
     text-decoration: none;
-    background: rgba(244,239,228,0.6);
-    backdrop-filter: blur(6px);
+    background: rgba(245,243,239,0.72);
+    backdrop-filter: blur(8px);
+    transition: transform 0.25s var(--ease-out), border-color 0.25s ease, background 0.25s ease;
+  }
+  .call-pill:hover {
+    transform: translateY(-2px);
+    border-color: var(--signal);
+    background: rgba(245,243,239,0.92);
+  }
+  .call-dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--signal-bright);
+    box-shadow: 0 0 0 3px rgba(23,185,140,0.18);
   }
 </style>

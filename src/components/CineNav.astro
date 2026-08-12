@@ -1,0 +1,213 @@
+---
+const chapters = [
+  { id: "scene-hero", label: "Start" },
+  { id: "scene-philosophy", label: "Haltung" },
+  { id: "scene-service-01", label: "Vorsorge" },
+  { id: "scene-service-02", label: "Zahnerhalt" },
+  { id: "scene-service-03", label: "Zahnersatz" },
+  { id: "scene-service-04", label: "Ästhetik" },
+  { id: "scene-service-05", label: "Kinder" },
+  { id: "scene-doctor", label: "Ihr Zahnarzt" },
+  { id: "scene-contact", label: "Kontakt" },
+];
+---
+<nav class="cine-nav" aria-label="Kapitelnavigation">
+  <div class="cine-rail">
+    <div class="cine-rail-fill" id="cine-rail-fill" aria-hidden="true"></div>
+    {chapters.map((c, i) => (
+      <a class="cine-dot" href={`#${c.id}`} data-target={c.id} data-index={i}>
+        <span class="cine-num">{String(i + 1).padStart(2, "0")}</span>
+        <span class="cine-dot-mark" aria-hidden="true"></span>
+        <span class="cine-label">{c.label}</span>
+      </a>
+    ))}
+  </div>
+</nav>
+
+<div class="cine-mobile" aria-hidden="true">
+  <span class="cine-mobile-label" id="cine-mobile-label">Start</span>
+  <span class="cine-mobile-count"><span id="cine-current">01</span>/<span id="cine-total">09</span></span>
+</div>
+
+<style>
+  .cine-nav {
+    position: fixed;
+    top: 50%;
+    right: clamp(14px, 2.4vw, 34px);
+    transform: translateY(-50%);
+    z-index: 45;
+  }
+  .cine-rail {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 14px;
+    padding: 18px 6px;
+  }
+  .cine-rail-fill {
+    position: absolute;
+    top: 0; right: 15px;
+    width: 1px;
+    height: 100%;
+    background: var(--line);
+  }
+  .cine-rail-fill::after {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: var(--fill, 0%);
+    background: var(--signal);
+    transition: height 0.15s linear;
+  }
+  .cine-dot {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: var(--ink);
+    padding: 3px 0;
+  }
+  .cine-num {
+    font-size: 11px;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.04em;
+    color: var(--ink-faint);
+    opacity: 0;
+    transform: translateX(6px);
+    transition: opacity 0.25s var(--ease-out), transform 0.25s var(--ease-out);
+  }
+  .cine-label {
+    font-size: 13px;
+    white-space: nowrap;
+    background: rgba(245,243,239,0.9);
+    backdrop-filter: blur(6px);
+    padding: 5px 12px;
+    border-radius: 999px;
+    box-shadow: 0 4px 18px rgba(13,17,16,0.1);
+    opacity: 0;
+    transform: translateX(10px);
+    pointer-events: none;
+    transition: opacity 0.25s var(--ease-out), transform 0.25s var(--ease-out);
+  }
+  .cine-dot-mark {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--ink-faint);
+    border: 1px solid transparent;
+    transition: background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+    flex-shrink: 0;
+  }
+  .cine-dot:hover .cine-label,
+  .cine-dot:focus-visible .cine-label,
+  .cine-dot:hover .cine-num,
+  .cine-dot:focus-visible .cine-num {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  .cine-dot.is-active .cine-dot-mark {
+    background: var(--signal);
+    transform: scale(1.7);
+    box-shadow: 0 0 0 4px rgba(14,122,95,0.16);
+  }
+  .cine-dot.is-active .cine-label {
+    opacity: 1;
+    color: var(--signal-deep);
+    font-weight: 600;
+  }
+
+  .cine-mobile { display: none; }
+
+  @media (max-width: 780px) {
+    .cine-nav { display: none; }
+    .cine-mobile {
+      display: flex;
+      position: fixed;
+      left: 0; right: 0; bottom: 0;
+      z-index: 45;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 18px calc(10px + env(safe-area-inset-bottom));
+      background: rgba(245,243,239,0.88);
+      backdrop-filter: blur(10px);
+      border-top: 1px solid var(--line);
+      font-size: 12px;
+      letter-spacing: 0.04em;
+    }
+    .cine-mobile-label { text-transform: uppercase; color: var(--ink-soft); font-weight: 600; }
+    .cine-mobile-count { font-variant-numeric: tabular-nums; color: var(--ink-faint); }
+  }
+</style>
+
+<script>
+  const scenes = Array.from(document.querySelectorAll<HTMLElement>(".scene"));
+  const dots = Array.from(document.querySelectorAll<HTMLAnchorElement>(".cine-dot"));
+  const railFill = document.getElementById("cine-rail-fill");
+  const mobileLabel = document.getElementById("cine-mobile-label");
+  const currentEl = document.getElementById("cine-current");
+  const totalEl = document.getElementById("cine-total");
+  if (totalEl) totalEl.textContent = String(scenes.length).padStart(2, "0");
+
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  function setActive(index: number) {
+    dots.forEach((d, i) => d.classList.toggle("is-active", i === index));
+    if (currentEl) currentEl.textContent = String(index + 1).padStart(2, "0");
+    if (mobileLabel) mobileLabel.textContent = dots[index]?.querySelector(".cine-label")?.textContent ?? "";
+    if (railFill) railFill.style.setProperty("--fill", `${(index / Math.max(scenes.length - 1, 1)) * 100}%`);
+  }
+
+  dots.forEach((dot) => {
+    dot.addEventListener("click", (e) => {
+      e.preventDefault();
+      const target = document.getElementById(dot.dataset.target || "");
+      target?.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
+    });
+  });
+
+  if (reduceMotion) {
+    scenes.forEach((s) => s.classList.add("is-active"));
+    setActive(0);
+  } else if (scenes.length) {
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          entry.target.classList.toggle(
+            "is-active",
+            entry.isIntersecting && entry.intersectionRatio > 0.5
+          );
+          if (entry.isIntersecting && entry.intersectionRatio > 0.5) {
+            const idx = scenes.indexOf(entry.target as HTMLElement);
+            if (idx > -1) setActive(idx);
+          }
+        });
+      },
+      { threshold: [0, 0.5, 1] }
+    );
+    scenes.forEach((s) => io.observe(s));
+
+    let ticking = false;
+    const updateProgress = () => {
+      const vh = window.innerHeight;
+      scenes.forEach((s) => {
+        const rect = s.getBoundingClientRect();
+        let p = 1 - rect.top / vh;
+        p = Math.max(0, Math.min(1, p));
+        s.style.setProperty("--sp", p.toFixed(3));
+      });
+      ticking = false;
+    };
+    window.addEventListener(
+      "scroll",
+      () => {
+        if (!ticking) {
+          requestAnimationFrame(updateProgress);
+          ticking = true;
+        }
+      },
+      { passive: true }
+    );
+    updateProgress();
+  }
+</script>
